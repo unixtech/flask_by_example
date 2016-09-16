@@ -1,4 +1,4 @@
-from app import db
+from app import *
 from sqlalchemy.dialects.postgresql import JSONB
 
 class Result(db.Model):
@@ -16,4 +16,3 @@ class Result(db.Model):
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
-

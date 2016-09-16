@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WordCount</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="static/bootstrap.min.css">
+            <style>
+            </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+        <pre>{% raw %} {{ $data | jsonIt }} {% endraw %}</pre>
+        <div class="container">
+            <div class="row">
+            <div class='col-sm-5 col-sm-offset-1'>
+            <h1>WordCount 3000</h1>
+            <form @submit='getJobId' action="/" method='POST' role="form">
+                <div class="form-group ">
+                    <input  v-model="newTask" type="text" name='url' class=form-control id='url-box' placeholder='Enter URL to scan for words' autofocus required >
+                {% raw %}
+                <button :disabled="loading" type="submit" class='btn btn-default btn-block'>{{ submitButtonText }}</button>
+                {% endraw %}
+                </div>
+            </form>
+            <br>
+            {% for error in errors %}
+                <h4> {{ error }}</h4>
+            {% endfor %}
+        </div>
+        <div class="col-sm-5 col-sm-offset-1">
+        
+            <h2>Frequencies</h2>
+            <br>
+            <div id="results"  >
+                <table class="table table-striped" style="max-width:300px">
+                <thead>
+                    <tr>
+                        <td>
+                            <th>Word</th>
+                            <th>Count</th>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+            {% raw %}
+                    <tr v-for="(count, word) in results1">
+                        <td><th>{{ word }}</th>
+                            <th>{{ count }}</th></td>
+                    </tr>
+            {% endraw %}
+                </tbody>
+                </table>
+                <img class='col-sm-3 col-sm-offset-3' src="{{ url_for('static', filename='spinner.gif') }}" v-show='loading' alt="">
+            </div>
+
+        </div>
+        
+        </div>
+        </div>
+        </div>
+
+
+        <script src="static/jquery.js"></script>
+        <script src="static/bootstrap.min.js"></script>
+        <script src="{{ url_for('static', filename='vue.js') }}"></script>
+        <script src="{{ url_for('static', filename='main.js') }}"></script>
+    </body>
+</html>
